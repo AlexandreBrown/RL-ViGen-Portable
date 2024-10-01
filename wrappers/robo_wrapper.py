@@ -1,7 +1,6 @@
 from dm_env import specs, Environment, TimeStep, StepType
 from wrappers.dmc import ActionDTypeWrapper, ActionRepeatWrapper, ExtendedTimeStepWrapper
 from dm_control.suite.wrappers import action_scale
-import robosuite as suite
 from collections import deque
 from dm_env import StepType, specs
 import dm_env
@@ -126,10 +125,3 @@ def robo_make(name, frame_stack=3, action_repeat=2, seed=1, scene_id=0):
     env = FrameStackWrapper(env, frame_stack)
     env = ExtendedTimeStepWrapper(env)
     return env
-
-
-
-
-
-
-

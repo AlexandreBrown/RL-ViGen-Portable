@@ -1,16 +1,11 @@
-import gym
 import numpy as np
-from matplotlib import pyplot as plt
-# import habitat.utils.gym_definitions
 from typing import Any, NamedTuple
 import dm_env
 from dm_env import specs, Environment, TimeStep, StepType
 from collections import deque
-from dm_control.suite.wrappers import action_scale, pixels
+from dm_control.suite.wrappers import action_scale
 import cv2
-import matplotlib
-import matplotlib.image as img
-from habitat.utils.visualizations import maps
+from habitat import *
 
 
 class ExtendedTimeStep(NamedTuple):
@@ -252,9 +247,6 @@ class Gym2DMC(Environment):
 
     def action_spec(self):
         return self._action_spec
-
-
-from habitat import *
 
 
 def make_habitat_env(name, mode, seed, frame_stack=3, action_repeat=1, appearance_id='original'):

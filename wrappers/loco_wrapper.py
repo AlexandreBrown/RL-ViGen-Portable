@@ -1,5 +1,5 @@
 from dm_env import specs, Environment, TimeStep, StepType
-from dmc import ActionDTypeWrapper, ActionRepeatWrapper, ExtendedTimeStepWrapper
+from dmc import ActionDTypeWrapper, ExtendedTimeStepWrapper
 from dm_control.suite.wrappers import action_scale
 from collections import deque
 from dm_env import StepType, specs

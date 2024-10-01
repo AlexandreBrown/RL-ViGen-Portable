@@ -7,3 +7,11 @@ Author: Yuke Zhu
 Author-email: yukez@cs.utexas.edu
 Requires-Python: >=3
 Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.13.3
+Requires-Dist: numba>=0.49.1
+Requires-Dist: scipy>=1.2.3
+Requires-Dist: mujoco>=2.3.0
+Requires-Dist: Pillow
+Requires-Dist: opencv-python
+Requires-Dist: pynput
+Requires-Dist: termcolor

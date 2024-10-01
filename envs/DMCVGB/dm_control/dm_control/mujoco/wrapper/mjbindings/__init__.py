@@ -16,20 +16,20 @@
 """Import core names of MuJoCo ctypes bindings."""
 
 
-from absl import logging
+# from absl import logging
 
-from dm_control.mujoco.wrapper.mjbindings import constants
-from dm_control.mujoco.wrapper.mjbindings import enums
-from dm_control.mujoco.wrapper.mjbindings import sizes
+# from dm_control.mujoco.wrapper.mjbindings import constants
+# from dm_control.mujoco.wrapper.mjbindings import enums
+# from dm_control.mujoco.wrapper.mjbindings import sizes
 
-# Internal analytics import.
+# # Internal analytics import.
 
-# pylint: disable=g-import-not-at-top
-try:
-  from dm_control.mujoco.wrapper.mjbindings import functions
-  from dm_control.mujoco.wrapper.mjbindings.functions import mjlib
-  logging.info('MuJoCo library version is: %d', mjlib.mj_version())
-  # Internal analytics.
-except (IOError, OSError):
-  logging.warning('mjbindings failed to import mjlib and other functions. '
-                  'libmujoco.so may not be accessible.')
+# # pylint: disable=g-import-not-at-top
+# try:
+#   from dm_control.mujoco.wrapper.mjbindings import functions
+#   from dm_control.mujoco.wrapper.mjbindings.functions import mjlib
+#   logging.info('MuJoCo library version is: %d', mjlib.mj_version())
+#   # Internal analytics.
+# except (IOError, OSError):
+#   logging.warning('mjbindings failed to import mjlib and other functions. '
+#                   'libmujoco.so may not be accessible.')

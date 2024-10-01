@@ -18,15 +18,8 @@ from PIL.PngImagePlugin import PngImageFile, PngInfo
 
 
 sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/')
-sys.path.append('./third_party/shared/CARLA_0.9.10/PythonAPI/carla')
-sys.path.append('./third_party/shared/CARLA_0.9.10/PythonAPI/carla/dist/carla-0.9.10-py3.7-linux-x86_64.egg')
-try:
-    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
-        sys.version_info.major,
-        sys.version_info.minor,
-        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
-except IndexError:
-    pass
+sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/carla/')
+sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/carla/dist/')
 
 import carla
 import math
@@ -48,6 +41,7 @@ try:
 except ImportError:
     import Queue as queue
 
+# From Carla
 from agents.navigation.agent import Agent, AgentState
 from agents.navigation.local_planner import LocalPlanner
 
@@ -527,15 +521,12 @@ class CarlaEnv10_eval(object):
         self.world.tick()
         self.reset_other_vehicles()
         self.world.tick()
-        # self.reset_pedestrians()
-        # self.world.tick()
         self.agent = RoamingAgentModified(self.vehicle, follow_traffic_lights=False)
         self.count = 0
         self.dist_s = 0
         self.return_ = 0
         self.velocities = []
 
-        # get obs:
         obs, _, _, _ = self.step(action=None)
         return obs
 

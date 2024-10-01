@@ -1,6 +1,0 @@
-defaults:
-  - easy
-  - _self_
-
-task_name: NutAssemblyRound
-feature_dim: 50

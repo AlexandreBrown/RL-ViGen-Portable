@@ -1,0 +1,41 @@
+name: rl-vigen-portable
+channels:
+  - conda-forge
+  - aihabitat
+dependencies:
+  - conda-forge::python==3.8
+  - conda-forge::cmake=3.14.0
+  - aihabitat::habitat-sim=0.2.3
+  - aihabitat::withbullet
+  - aihabitat::headless
+  - pip
+  - pip:
+    - --index https://pypi.tuna.tsinghua.edu.cn/simple
+    - mujoco==2.3.0
+    - -e ./envs/DMCVGB
+    - -e ./envs/DMCVGB/dmc2gym
+    - -e ./envs/DMCVGB/dm_control
+    - -e ./third_party/robosuite
+    - -e ./envs/robosuiteVGB/
+    - -e ./envs/androitVGB/mujoco-py
+    - -e ./envs/androitVGB/DHM
+    - -e ./envs/androitVGB/DHM/mjrl
+    - -e ./envs/androitVGB/DHM/mj_envs
+    - -e ./envs/habitatVGB/habitat-lab
+    - -e ./envs/habitatVGB/
+    - pyparsing==2.4.7
+    - xmltodict==0.13.0
+    - glfw==1.12.0
+    - termcolor==1.1.0
+    - imageio==2.9.0
+    - imageio-ffmpeg==0.4.4
+    - ipdb==0.13.9
+    - matplotlib==3.4.2
+    - opencv-python==4.5.3.56
+    - scipy==1.9.3
+    - protobuf==3.20.3
+    - h5py==3.11.0
+    - gym==0.23.1
+    - dotmap==1.3.30
+    - pygame==2.1.2
+    - absl-py==0.13.0

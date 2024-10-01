@@ -1,6 +1,0 @@
-defaults:
-  - easy
-  - _self_
-
-task_name: TwoArmLift
-feature_dim: 50

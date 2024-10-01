@@ -1,5 +1,6 @@
 setup.py
 habitat/__init__.py
+habitat/py.typed
 habitat/version.py
 habitat/config/__init__.py
 habitat/config/default.py

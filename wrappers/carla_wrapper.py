@@ -4,7 +4,7 @@ from typing import Any, NamedTuple
 from dm_env import StepType, specs
 import collections
 import dm_env
-from carlaenv.utils import make_env_10, make_env_10_eval
+from wrappers.carlaenv.utils import make_env_10, make_env_10_eval
 import numpy as np
 
 
@@ -105,15 +105,13 @@ class ExtendedTimeStepWrapper(dm_env.Environment):
         return getattr(self._env, name)
     
     
-def carla_make(action_repeat):
-    env = make_env_10(action_repeat)
+def carla_make(cfg_dict: dict, action_repeat):
+    env = make_env_10(cfg_dict, action_repeat)
     env = ExtendedTimeStepWrapper(FrameStack(env, 3))
     return env
     
     
-def carla_make_eval(action_repeat):
-    env = make_env_10_eval(action_repeat)
+def carla_make_eval(cfg_dict, action_repeat):
+    env = make_env_10_eval(cfg_dict, action_repeat)
     env = ExtendedTimeStepWrapper(FrameStack(env, 3))
     return env
-    
-    

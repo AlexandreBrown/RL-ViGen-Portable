@@ -1,6 +1,0 @@
-defaults:
-  - easy
-  - _self_
-
-task_name: TwoArmHandOver
-feature_dim: 50

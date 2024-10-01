@@ -22,3 +22,16 @@ Classifier: Intended Audience :: Education
 Classifier: Intended Audience :: Science/Research
 Classifier: Operating System :: MacOS
 Classifier: Operating System :: Unix
+Requires-Dist: gym<=0.23.1,>=0.22.0
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: numpy-quaternion>=2019.3.18.14.33.20
+Requires-Dist: attrs>=19.1.0
+Requires-Dist: opencv-python>=3.3.0
+Requires-Dist: pickle5; python_version < "3.8"
+Requires-Dist: hydra-core>=1.2.0
+Requires-Dist: omegaconf>=2.2.3
+Requires-Dist: numba>=0.44.0
+Requires-Dist: imageio>=2.2.0
+Requires-Dist: imageio-ffmpeg>=0.2.0
+Requires-Dist: scipy>=1.0.0
+Requires-Dist: tqdm>=4.0.0

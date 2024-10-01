@@ -5,3 +5,4 @@ Summary: a gym like wrapper for dm_control
 Author: Denis Yarats
 Keywords: gym dm_control openai deepmind
 License-File: LICENSE
+Requires-Dist: gym==0.23.1
