@@ -1,4 +1,6 @@
 # Carla
+## Status  
+Works
 ## Prerequisites
 1. Make sure you have done the setup from the README at the root of the repository.
 2. To run the CARLA environment you must first start the carla simulator.  
