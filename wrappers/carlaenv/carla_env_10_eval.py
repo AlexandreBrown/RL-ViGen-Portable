@@ -7,19 +7,13 @@
 # For a copy, see <https://opensource.org/licenses/MIT>.
 #
 # Modified for DBC paper.
-import sys
 import random
 import glob
 import os
-import sys
 import time
 from PIL import Image
-from PIL.PngImagePlugin import PngImageFile, PngInfo
+from PIL.PngImagePlugin import PngInfo
 
-
-sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/')
-sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/carla/')
-sys.path.append('./third_party/CARLA_0.9.10/PythonAPI/carla/dist/')
 
 import carla
 import math
@@ -42,7 +36,7 @@ except ImportError:
     import Queue as queue
 
 # From Carla
-from agents.navigation.agent import Agent, AgentState
+from agents.navigation.basic_agent import BasicAgent
 from agents.navigation.local_planner import LocalPlanner
 
 
@@ -876,7 +870,7 @@ class LocalPlannerModified(LocalPlanner):
         return super().run_step(debug=False)  # otherwise by default shows waypoints, that interfere with our camera
 
 
-class RoamingAgentModified(Agent):
+class RoamingAgentModified(BasicAgent):
     """
     RoamingAgent implements a basic agent that navigates scenes making random
     choices when facing an intersection.
@@ -889,20 +883,16 @@ class RoamingAgentModified(Agent):
 
         :param vehicle: actor to apply to local planner logic onto
         """
-        super(RoamingAgentModified, self).__init__(vehicle)
-        self._proximity_threshold = 10.0  # meters
-        self._state = AgentState.NAVIGATING
-        self._follow_traffic_lights = follow_traffic_lights
-
-        # for throttle 0.5, 0.75, 1.0
         args_lateral_dict = {
             'K_P': 1.0,
             'K_D': 0.005,
             'K_I': 0.0,
-            'dt': 1.0 / 20.0}
+            'dt': 1.0 / 20.0
+        }
         opt_dict = {'lateral_control_dict': args_lateral_dict}
-
-        self._local_planner = LocalPlannerModified(self._vehicle, opt_dict)
+        super(RoamingAgentModified, self).__init__(vehicle, target_speed=20, opt_dict=opt_dict)
+        self._local_planner = LocalPlannerModified(self._vehicle, opt_dict=opt_dict)
+        self._follow_traffic_lights = follow_traffic_lights
 
     def run_step(self, debug=False):
         """
@@ -920,28 +910,24 @@ class RoamingAgentModified(Agent):
         lights_list = actor_list.filter("*traffic_light*")
 
         # check possible obstacles
-        vehicle_state, vehicle = self._is_vehicle_hazard(vehicle_list)
+        vehicle_state, vehicle = self._vehicle_obstacle_detected(vehicle_list)
         if vehicle_state:
             if debug:
                 print('!!! VEHICLE BLOCKING AHEAD [{}])'.format(vehicle.id))
 
-            self._state = AgentState.BLOCKED_BY_VEHICLE
             hazard_detected = True
 
         # check for the state of the traffic lights
-        light_state, traffic_light = self._is_light_red(lights_list)
+        light_state, traffic_light = self._affected_by_traffic_light(lights_list)
         if light_state and self._follow_traffic_lights:
             if debug:
                 print('=== RED LIGHT AHEAD [{}])'.format(traffic_light.id))
 
-            self._state = AgentState.BLOCKED_RED_LIGHT
             hazard_detected = True
 
         if hazard_detected:
             control = self.emergency_stop()
         else:
-            self._state = AgentState.NAVIGATING
-            # standard local planner behavior
             control = self._local_planner.run_step()
 
         return control

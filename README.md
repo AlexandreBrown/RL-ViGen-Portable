@@ -64,19 +64,25 @@ Note : This repo is a WIP currently
 The following will install the dependencies and environments required by RL-ViGen.  
 After the installation, one can import the environments in python and create them for train/eval purposes.
 1. Manually download Gibson Full scene datasets : https://github.com/facebookresearch/habitat-sim/blob/main/DATASETS.md#gibson-and-3dscenegraph-datasets
-1. Extract the zip to `data/datasets/gibson_full/`
-1.  ```shell
-    chmod +x setup.sh
+    - This step is manual because you must sign a form to download the data (out of our control).
+1. Extract the gibson scene dataset archive to `data/datasets/gibson_full/`
+1. Create a conda environment  
+    ```shell
+    conda create -f environment.yaml -y
     ```
-1.  ```shell
-    ./setup.sh
-    ```
-    - This will create a conda env named `rl-vigen-portable`, alternatively, take a look at the `environment.yaml` file and add it to your existing conda environment.
+    - This will create a conda env named `rl-vigen-portable`, alternatively, take a look at the `environment.yaml` file and add the dependencies to your existing conda environment.
 1. Activate the conda environment  
     ```shell
     conda activate rl-vigen-portable
     ```
-
+1. Download external datasets & setup Carla sim  
+    ```shell
+    bash setup.sh
+    ```
+1. Add wrappers and carla to your PYTHONPATH, run the following **from the root of the repository** :  
+    ```shell
+    export PYTHONPATH=$(pwd):third_party/CARLA_0.9.12/PythonAPI/carla:$PYTHONPATH
+    ```
 At the end, your `data/` folder should look like this :  
 ```shell
 data/
@@ -85,9 +91,12 @@ data/
         |
         -- gibson_full/
         -- pointnav/
-```
+```  
+# Documentation  
+See **doc/** folder for documentation on how to create environments, a **README** with minimum working examples is created for each environment.  
+
 # Important
-Some code changes were done so that the environments no longer depend on Hydra. Instead, the functions that allow the creation of the environments expect a python dictionary with the config for the environment.   
+Many code changes were done so that the environments no longer depend on a Hydra config to be created. Instead, the functions that allow the creation of the environments expect a python dictionary with the config for the environment.   
 An easy way to use this is to use Hydra **in your own repository** and simply convert your hydra `DictConfig` object to a python `dict` using `OmegaConf.to_container(my_hydra_dict_config)`.  
 This was done to make you the owner of the Hydra config, you can setup Hydra the way you want and simply pass a dict now.
 
@@ -95,20 +104,6 @@ This was done to make you the owner of the Hydra config, you can setup Hydra the
 - `envs`: various RL-ViGen benchmark environments. In addtion, each sub-folder contains specific `README.md` for the introduction of the environment.
 - `third_party`: submodules from third parties. We won't frequently change the code in this folder.
 - `wrappers`: includes the wrappers for each environment.
-
-
-
-<!-- ### CARLA
-- For CARLA, you should start the CARLA engine first:
-```
-SDL_HINT_CUDA_DEVICE=0 ./CarlaUE4.sh -fps 20 --carla-port=2022
-```
-The `SDL_HINT_CUDA_DEVICE` is the running GPU id, and we can set the `carla-port` to run multiple CARLA instances.
-
-- Third, you should run the code as the following way:
-```
-LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7 bash carlatrain.sh
-``` -->
 
 If you find RL-ViGen useful in your research, please consider citing the authors work as follows:
 

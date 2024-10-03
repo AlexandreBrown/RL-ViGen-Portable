@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - aihabitat
 dependencies:
-  - conda-forge::python==3.8
+  - conda-forge::python=3.8
   - conda-forge::cmake=3.14.0
   - aihabitat::habitat-sim=0.2.3
   - aihabitat::withbullet
@@ -11,7 +11,6 @@ dependencies:
   - pip
   - pip:
     - --index https://pypi.tuna.tsinghua.edu.cn/simple
-    - mujoco==2.3.0
     - -e ./envs/DMCVGB
     - -e ./envs/DMCVGB/dmc2gym
     - -e ./envs/DMCVGB/dm_control
@@ -23,6 +22,7 @@ dependencies:
     - -e ./envs/androitVGB/DHM/mj_envs
     - -e ./envs/habitatVGB/habitat-lab
     - -e ./envs/habitatVGB/
+    - mujoco==2.3.0
     - pyparsing==2.4.7
     - xmltodict==0.13.0
     - glfw==1.12.0
@@ -39,3 +39,4 @@ dependencies:
     - dotmap==1.3.30
     - pygame==2.1.2
     - absl-py==0.13.0
+    - networkx==3.1

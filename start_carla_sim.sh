@@ -1,0 +1,1 @@
+bash third_party/CARLA_0.9.12/CarlaUE4.sh -fps 20 --carla-port 2000

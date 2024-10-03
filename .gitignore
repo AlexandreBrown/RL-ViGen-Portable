@@ -10,3 +10,4 @@ envs/robosuiteVGB/*.egg-info/
 PKG-INFO
 data/
 third_party/CARLA_0.9.10/
+third_party/CARLA_0.9.12/
